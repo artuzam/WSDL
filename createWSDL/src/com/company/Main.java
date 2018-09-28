@@ -1,5 +1,8 @@
 package com.company;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Parameter;
 import java.util.Arrays;
@@ -8,8 +11,17 @@ import java.util.List;
 public class Main {
 
     public static void main(String[] args) {
-	// write your code here
-        getWSDL("HolaMundo","com.company.HolaMundo");
+        String WSDL = getWSDL("HolaMundo","com.company.HolaMundo");
+        try {
+            File WSDLfile = new File("newWSDL.wsdl");
+            FileWriter writer = new FileWriter(WSDLfile);
+            writer.write(WSDL);
+            writer.flush();
+            writer.close();
+        }
+        catch(IOException e){
+            e.printStackTrace();
+        }
     }
 
     public static String getWSDL(String serviceName, String className){
