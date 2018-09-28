@@ -18,8 +18,8 @@
       <file leaf-file-name="Main.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/company/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="312">
-              <caret line="20" column="34" lean-forward="true" selection-start-line="20" selection-start-column="34" selection-end-line="20" selection-end-column="34" />
+            <state relative-caret-position="1122">
+              <caret line="75" column="61" lean-forward="true" selection-start-line="75" selection-start-column="61" selection-end-line="75" selection-end-column="61" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -132,7 +132,21 @@
       <option name="project" value="LOCAL" />
       <updated>1537940733540</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Se añadió el uri WSDL">
+      <created>1538103567880</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1538103567880</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Se escribe el servicio en el archivo newWSDL.wsdl">
+      <created>1538104396330</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1538104396330</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -148,11 +162,11 @@
       <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.50073206" side_tool="true" weight="0.4435612" />
       <window_info anchor="right" id="Maven Projects" order="3" />
       <window_info anchor="bottom" id="Version Control" order="7" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49926794" visible="true" weight="0.2400636" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49926794" visible="true" weight="0.4880763" />
       <window_info anchor="bottom" id="Terminal" order="7" />
       <window_info id="Capture Tool" order="2" />
       <window_info id="Designer" order="2" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.20278184" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.20278184" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info id="UI Designer" order="2" />
@@ -173,7 +187,9 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Arreglos en el header y se agregó types (Inicio y final)" />
     <MESSAGE value="Se añadió typeMedio y el array tipos para verificar si es un tipo primitivo" />
-    <option name="LAST_COMMIT_MESSAGE" value="Se añadió typeMedio y el array tipos para verificar si es un tipo primitivo" />
+    <MESSAGE value="Se añadió el uri WSDL" />
+    <MESSAGE value="Se escribe el servicio en el archivo newWSDL.wsdl" />
+    <option name="LAST_COMMIT_MESSAGE" value="Se escribe el servicio en el archivo newWSDL.wsdl" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/com/company/Main.java">
@@ -186,10 +202,13 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/newWSDL.wsdl">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/company/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="312">
-          <caret line="20" column="34" lean-forward="true" selection-start-line="20" selection-start-column="34" selection-end-line="20" selection-end-column="34" />
+        <state relative-caret-position="1122">
+          <caret line="75" column="61" lean-forward="true" selection-start-line="75" selection-start-column="61" selection-end-line="75" selection-end-column="61" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

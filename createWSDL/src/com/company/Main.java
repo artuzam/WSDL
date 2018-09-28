@@ -7,11 +7,21 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Parameter;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Scanner;
 
 public class Main {
 
     public static void main(String[] args) {
-        String WSDL = getWSDL("HolaMundo","com.company.HolaMundo");
+        String serviceName;
+        String className;
+
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Digite el nombre del nuevo servicio: ");
+        serviceName = sc.nextLine();
+        System.out.println("Digite el nombre de la clase que desea exponer. El nombre debe contener el package y pertenecer a este proyecto: ");
+        className = sc.nextLine();
+
+        String WSDL = getWSDL(serviceName,className);
         try {
             File WSDLfile = new File("newWSDL.wsdl");
             FileWriter writer = new FileWriter(WSDLfile);
