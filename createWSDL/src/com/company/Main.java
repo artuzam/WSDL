@@ -3,6 +3,7 @@ package com.company;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.lang.reflect.Parameter;
 import java.util.Arrays;
@@ -10,6 +11,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Main {
+    static String otrosTypes = "";
 
     public static void main(String[] args) {
         String serviceName;
@@ -44,10 +46,9 @@ public class Main {
         String puntoC = "";
 
         /**Descripción WSDL de la clase**/
-        String header = "<?xml version=\"1.0\" encoding\"UTF-8\"?>\n" +
+        String header = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
                 "<definitions name=\"" + serviceName +
                 "\"\n targetNamespace=\"urn:" + serviceName +
-                "\"\n xmlns:wsdl=\"http://schemas.xmlsoap.org/wsdl/\"" +
                 "\n xmlns:soap=\"http://schemas.xmlsoap.org/wsdl/soap/\"" +
                 "\n xmlns:tns=\"urn:" + serviceName + "\"" +
                 "\n xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\"" +
@@ -55,7 +56,7 @@ public class Main {
                 "\n xmlns=\"http://schemas.xmlsoap.org/wsdl/\">\n\n";
 
         /**Tipos complejos**/
-        String typesInicio = "  <types xmlns=\"http://schemas.xmlsoap.org/wsdl/\"/>\n" +
+        String typesInicio = "  <types xmlns=\"http://schemas.xmlsoap.org/wsdl/\">\n" +
                 "    <xsd:schema targetNamespace=\"urn:" + serviceName + "\">\n";
         String typesMedio = "";
         ClassLoader classLoader = Main.class.getClassLoader();
@@ -64,13 +65,13 @@ public class Main {
             Class aClass = classLoader.loadClass(className);
             Method[] metodos = aClass.getDeclaredMethods();
             for (Method metodo : metodos) {
-                String tipoRetorno = getTipo(metodo.getReturnType().getSimpleName());
+                String tipoRetorno = getTipo(metodo.getReturnType().getSimpleName(),aClass.getPackageName());
                 typesMedio += "      <xsd:element name=\"" + metodo.getName() + "\">\n" +
                         "        <xsd:complexType>\n" +
                         "          <xsd:sequence>\n";
                 Parameter[] parametros = metodo.getParameters();
                 for (Parameter parametro : parametros) {
-                    String tipoP = getTipo(parametro.getType().getSimpleName());
+                    String tipoP = getTipo(parametro.getType().getSimpleName(),aClass.getPackageName());
                     typesMedio += "            <xsd:element name=\"" + metodo.getName() + "_" + parametro.getName() + "\" type=\"" + tipoP + "\" />\n";
                 }
                 typesMedio += "          </xsd:sequence>\n" +
@@ -84,9 +85,9 @@ public class Main {
                         "        </xsd:complexType>\n" +
                         "      </xsd:element>\n";
             }
-            String typesFinal = "    <schema>\n" +
+            String typesFinal = "    </xsd:schema>\n" +
                     "  </types>\n\n";
-            types = typesInicio + typesMedio + typesFinal;
+            types = typesInicio + otrosTypes + typesMedio + typesFinal;
 
             /**Mensajes para comunicarse con la clase**/
             for (Method metodo : metodos) {
@@ -133,7 +134,7 @@ public class Main {
                 "    <port name=\"" + serviceName + "Port\" binding=\"tns:" + serviceName + "Binding\">\n" +
                 "      <soap:address location=\"" + urlWSDL + "\" />\n" +
                 "    </port>\n" +
-                "  <service>\n\n";
+                "  </service>\n\n";
 
         WSDL = header+types+mensajes+puerto+vinculaciones+puntoC+"</definitions>";
 
@@ -142,7 +143,7 @@ public class Main {
         return WSDL;
     }
 
-    private static String getTipo(String simpleName) {
+    private static String getTipo(String simpleName, String packageName) {
         List<String> tipos = Arrays.asList("String", "boolean", "int", "integer", "float", "double"); //para verifcar si es un tipo primitivo
         String tipo = "";
         if (tipos.contains(simpleName)) {
@@ -161,6 +162,25 @@ public class Main {
         }
         else {
             //El tipo no es de los primitivos:
+            tipo = "tns:" + simpleName;
+            ClassLoader classLoader = Main.class.getClassLoader();
+
+            try {
+                Class aClass = classLoader.loadClass(packageName+"."+simpleName);
+                Field[] fields = aClass.getDeclaredFields();
+                otrosTypes += "      <xsd:element name=\"" + simpleName + "\">\n" +
+                        "        <xsd:complexType>\n" +
+                        "          <xsd:sequence>\n";
+
+                for (Field field : fields) {
+                    otrosTypes += "            <xsd:element name=\"" + field.getName() + "\" type=\"" + getTipo(field.getType().getSimpleName(),packageName) + "\" />\n";
+                }
+                otrosTypes += "          </xsd:sequence>\n" +
+                        "        </xsd:complexType>\n" +
+                        "      </xsd:element>\n";
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            }
         }
         return tipo;
     }

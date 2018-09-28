@@ -8,4 +8,6 @@ public class HolaMundo {
     public int sumar(int a, int b) {
         return  a+b;
     }
+
+    public String infoPersona(Persona persona) { return persona.infoPersona(); }
 }
