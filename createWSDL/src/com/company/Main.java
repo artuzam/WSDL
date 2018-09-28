@@ -14,7 +14,7 @@ public class Main {
 
     public static String getWSDL(String serviceName, String className){
         String WSDL = "";
-        String urlWSDL = ""; //No estoy seguro de qué poner aquí. En el ejemplo del profe se ve algo como "http://titanic.ecci.ucr.ac.cr:80/~bsolano/HolaMundoServiceDocumentLiteral/ y en del PHP agarra las varas del servidor en el que se está corriendo"
+        String urlWSDL = "http://elServicio.nombreUnico"; //No estoy seguro de qué poner aquí. En el ejemplo del profe se ve algo como "http://titanic.ecci.ucr.ac.cr:80/~bsolano/HolaMundoServiceDocumentLiteral/ y en del PHP agarra las varas del servidor en el que se está corriendo"
         String types = ""; //types = typesInicio + typesMedio + typesFinal
         String mensajes = "";
         String puerto = "";
